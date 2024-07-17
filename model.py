@@ -3,11 +3,12 @@
 
 
 from werkzeug.security import generate_password_hash, check_password_hash
+#from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
+from application import db  # Import the db instance from application
 
 # Assuming the db instance is imported from your main application
-db = SQLAlchemy()
+#db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,9 +1,21 @@
+import os
 from application import app, db
 from model import User, Message
 
+# Path to the SQLite database file
+db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'application.db')
+
+# Remove the existing SQLite database file
+if os.path.exists(db_path):
+    os.remove(db_path)
+
 with app.app_context():
-    # Create tables
+    # Drop all the tables
+    print("Dropping all tables...")
+    db.drop_all()
+    print("Creating all tables...")
     db.create_all()
+    print("Tables created")
 
     # Create a new user
     user = User(username='john_doe', email='john@example.com')
