@@ -7,8 +7,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from application import db  # Import the db instance from application
 
-# Assuming the db instance is imported from your main application
-#db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
