@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 import jwt
 import os
@@ -18,10 +17,13 @@ def create_app():
     CORS(app)
     db.init_app(app)
 
-    # Import models
+    # Import routes after db initialization to avoid circular import issues
     from model import User, Message
+    register_routes(app)
 
-    # Define routes
+    return app
+
+def register_routes(app):
     @app.route('/')
     def index():
         return jsonify({"message": "Hello, World!"})
@@ -82,11 +84,6 @@ def create_app():
         messages = Message.query.filter((Message.sender_id == user_id) | (Message.receiver_id == user_id)).all()
         return jsonify([{'sender_id': msg.sender_id, 'receiver_id': msg.receiver_id, 'content': msg.content, 'timestamp': msg.timestamp} for msg in messages])
 
-    return app
-
-# Create the Flask app
-app = create_app()
-
 if __name__ == '__main__':
+    app = create_app()
     app.run(debug=True)
-
