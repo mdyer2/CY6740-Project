@@ -1,21 +1,20 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
 from configuration import Config
-
-db = SQLAlchemy()
+from extensions import db
+from routes import register_routes
 
 def create_app():
+    # Create the Flask application
     app = Flask(__name__)
+    
+    # Load the configuration from the Config class
     app.config.from_object(Config)
-    CORS(app)
+    
+    # Initialize the database with the app
     db.init_app(app)
-
-    # Import and registeration routes
-    from model import User, Message  # Import to avoid circular imports
-    with app.app_context():
-        # Import routes here
-        from application import register_routes
-        register_routes(app)
+    
+    # Register routes
+    register_routes(app)
 
     return app
+
