@@ -1,10 +1,9 @@
 # This file will set up the user interface model creating a class for User 
 # and Message and defining how the passwords will be set through hashing. 
 
-
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from application import db  # Import the db instance from application
+from extensions import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -33,7 +32,6 @@ class Message(db.Model):
 
     def __repr__(self):
         return f'<Message {self.content} from {self.sender_id} to {self.receiver_id}>'
-
 
 
   
