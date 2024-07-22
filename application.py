@@ -1,15 +1,12 @@
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from datetime import datetime, timedelta
 import jwt
 import os
 
-# Import Configurations from configuration.py
 from configuration import Config
-
-# Initialize the db instance
-db = SQLAlchemy()
+from extensions import db
+from models import User, Message
 
 def create_app():
     app = Flask(__name__)
@@ -17,8 +14,7 @@ def create_app():
     CORS(app)
     db.init_app(app)
 
-    # Import routes after db initialization to avoid circular import issues
-    from model import User, Message
+    # Register routes after initializing the database
     register_routes(app)
 
     return app
