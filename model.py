@@ -3,10 +3,8 @@
 
 
 from werkzeug.security import generate_password_hash, check_password_hash
-#from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from application import db  # Import the db instance from application
-
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,6 +33,7 @@ class Message(db.Model):
 
     def __repr__(self):
         return f'<Message {self.content} from {self.sender_id} to {self.receiver_id}>'
+
 
 
   
