@@ -1,4 +1,4 @@
-const apiUrl = 'http://SecureChat';
+const apiUrl = "http://18.220.174.106:8000" ;
 
 // Section to Register on the website and become a user 
 document.getElementById('registerForm').addEventListener('submit', function(event) {
@@ -94,6 +94,6 @@ function loadMessages() {
 }
 
 // Load messages when the chat page loads
-if (window.location.pathname.endsWith('chat.html')) {
+if (window.location.pathname.endsWith('chatInterface.html')) {
     document.addEventListener('DOMContentLoaded', loadMessages);
 }
